@@ -14,14 +14,19 @@ import AddNewNoteModal from "./Modals/AddNewNoteModal";
 
 const VideoDetails = () => {
     const { videoId } = useParams();
-    const { videosData, setVideosData, removeFromWatchLater, addToWatchLater } =
-        useContext(VideosContext);
-    const videoToRender = videosData.find(
+    const {
+        videosData,
+        videosDataLocalStorage,
+        setVideosData,
+        removeFromWatchLater,
+        addToWatchLater,
+    } = useContext(VideosContext);
+    const videoToRender = videosDataLocalStorage.find(
         (video) => video._id === Number(videoId)
     );
 
     const handleDelete = (note) => {
-        const updatedVideosData = videosData.map((video) =>
+        const updatedVideosData = videosDataLocalStorage.map((video) =>
             video._id === videoToRender._id
                 ? {
                       ...video,
@@ -32,6 +37,7 @@ const VideoDetails = () => {
                 : video
         );
         setVideosData(updatedVideosData);
+        localStorage.setItem("allVideos", JSON.stringify(updatedVideosData));
     };
 
     return (

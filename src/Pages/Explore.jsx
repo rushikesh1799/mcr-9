@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import VideoCard from "../Components/VideoCard";
 import Navigation from "../Components/Navigation";
 import { VideosContext } from "../Context/VideosContext";
 
 const Explore = () => {
-    const { videosData } = useContext(VideosContext);
+    const { videosData, videosDataLocalStorage } = useContext(VideosContext);
 
     const [searchedText, setSearchedText] = useState("");
-    const searchedData = videosData.filter(({ title }) =>
+    const searchedData = videosDataLocalStorage.filter(({ title }) =>
         title.toLowerCase().includes(searchedText.toLowerCase())
     );
 

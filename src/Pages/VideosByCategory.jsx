@@ -5,14 +5,12 @@ import VideoCard from "../Components/VideoCard";
 import { VideosContext } from "../Context/VideosContext";
 
 const VideosByCategory = () => {
-    const { videosData } = useContext(VideosContext);
+    const { videosData, videosDataLocalStorage } = useContext(VideosContext);
     const { categoryName } = useParams();
 
-    const videosbyCategory = videosData.filter(
+    const videosbyCategory = videosDataLocalStorage.filter(
         (videoCategory) => videoCategory.category === categoryName
     );
-
-    console.log("videosbyCategory", videosbyCategory);
 
     return (
         <div className="home_wrapper">

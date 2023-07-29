@@ -3,10 +3,10 @@ import { VideosContext } from "../Context/VideosContext";
 import VideoCard from "../Components/VideoCard";
 import Navigation from "../Components/Navigation";
 
-import "./Styles.css"
+import "./Styles.css";
 
 const WatchLater = () => {
-    const { videosData } = useContext(VideosContext);
+    const { videosData, videosDataLocalStorage } = useContext(VideosContext);
 
     return (
         <div>
@@ -14,7 +14,7 @@ const WatchLater = () => {
             <div className="main_wrapper">
                 <Navigation />
                 <div className="video_category_wrapper">
-                    {videosData
+                    {videosDataLocalStorage
                         .filter((video) => video.isWatchLater)
                         .map((video) => (
                             <VideoCard video={video} key={video._id} />

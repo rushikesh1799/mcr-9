@@ -27,7 +27,8 @@ const AddNewNoteModal = ({ currentvideo }) => {
         content: "",
     });
 
-    const { videosData, setVideosData } = React.useContext(VideosContext);
+    const { videosData, videosDataLocalStorage, setVideosData } =
+        React.useContext(VideosContext);
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -39,7 +40,7 @@ const AddNewNoteModal = ({ currentvideo }) => {
         if (condition) {
             alert("Kindly please fill in all the details");
         } else {
-            const newVideosData = videosData.map((video) =>
+            const newVideosData = videosDataLocalStorage.map((video) =>
                 video._id === currentvideo._id
                     ? {
                           ...video,
@@ -50,6 +51,7 @@ const AddNewNoteModal = ({ currentvideo }) => {
             // console.log(newVideosData);
 
             setVideosData(newVideosData);
+            localStorage.setItem("allVideos", JSON.stringify(newVideosData));
             handleClose();
         }
     };

@@ -23,7 +23,12 @@ const style = {
 const EditNoteModal = ({ currentvideo, note }) => {
     const [updatedNote, setUpdatedNote] = React.useState(note);
 
-    const { videosData, setVideosData } = React.useContext(VideosContext);
+    const {
+        videosData,
+        setVideosData,
+        videosDataLocalStorage,
+        setVideosDataLocalStorage,
+    } = React.useContext(VideosContext);
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -35,7 +40,7 @@ const EditNoteModal = ({ currentvideo, note }) => {
         if (condition) {
             alert("Kindly please fill in all the details");
         } else {
-            const newEditedNote = videosData.map((video) =>
+            const newEditedNote = videosDataLocalStorage.map((video) =>
                 video._id === currentvideo._id
                     ? {
                           ...video,
@@ -49,6 +54,7 @@ const EditNoteModal = ({ currentvideo, note }) => {
             );
 
             setVideosData(newEditedNote);
+            localStorage.setItem("allVideos", JSON.stringify(newEditedNote));
             handleClose();
         }
     };
