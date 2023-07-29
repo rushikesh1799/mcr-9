@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router";
-import { videos } from "../DB/VideosData";
 import Navigation from "../Components/Navigation";
 import VideoCard from "../Components/VideoCard";
+import { VideosContext } from "../Context/VideosContext";
 
 const VideosByCategory = () => {
+    const { videosData } = useContext(VideosContext);
     const { categoryName } = useParams();
 
-    const videosbyCategory = videos.filter(
+    const videosbyCategory = videosData.filter(
         (videoCategory) => videoCategory.category === categoryName
     );
 
